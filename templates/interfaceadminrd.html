@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Registrar Docentes</title>
+    <!--Incluimos los iconos y la topología de la letra de nuestra página-->
+    <link rel="icon" type="image/x-icon" href="../static/assets/imagesadmin/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!--Estilos de la página-->
+    <link href="../static/css/styles_admin.css" rel="stylesheet" />
+
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+                    src="../static/assets/imagesadmin/profile.jpg" /></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                        href="{{ url_for('interfaceadmin') }}">INICIO</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                        href="{{ url_for('interfaceadminre') }}">Registrar
+                        Estudiante</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                        href="{{ url_for('interfaceadminrd') }}">Registrar
+                        Docente</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger"
+                        href="{{ url_for('interfaceadminrp') }}">Registrar
+                        Aula</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url_for('principal') }}">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Page Content-->
+    <div class="container-fluid p-0">
+
+        <div class="container">
+            <h1 class="text-center mt-5 mb-5">DOCENTES</h1>
+        </div>
+
+        <div class="container">
+            <div class="row row-col-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
+                <div class="col-md-6 mb-3" style="width: 300px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Registrar Docente</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="/docente" method="POST">
+
+                                <label>ID</label>
+                                <input type="text" class="form-control mb-3" value="idDoc1" name="iddocente">
+
+                                <label>Cedula</label>
+                                <input type="number" class="form-control mb-3" name="cedula" min="1000000000"
+                                    max="9999999999">
+
+                                <label>Nombre</label>
+                                <input type="text" class="form-control mb-3" name="name">
+
+                                <label>Apellido</label>
+                                <input type="text" class="form-control mb-3" name="lastname">
+
+                                <label>Rol</label>
+                                <input type="text" class="form-control mb-3" name="rol" value="Docente">
+
+                                <label>Año Lectivo</label>
+                                <input type="text" class="form-control mb-3" name="alectivo">
+
+                                <label>Paralelo</label>
+                                <input type="text" class="form-control mb-3" name="paralelo">
+
+                                <label>Estado</label>
+                                <select type="text" class="form-control mb-3" name="estado">
+                                    <option value="Activo">Activo</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                </select>
+
+                                <label>Email</label>
+                                <input type="email" class="form-control mb-3" name="mail">
+
+                                <label>Contraseña</label>
+                                <input type="password" class="form-control mb-3" name="pwd">
+
+                                <button class="btn btn-success" type="submit">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="width: 800px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="text-center">Editar Docentes</h5>
+                            
+                        </div>
+                        <div class="card-body">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">iD</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Correo</th>
+                                        <th><a href="{{ url_for('registerdocentes') }}" type="button"
+                                            class="form-control">Ver</a></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for personas in personas %}
+                                    <form>
+                                        <tr>
+                                            <td><input type="text" class="form-control" value="{{personas._id}}"
+                                                name="name" style="width: 125px;" disabled></td>
+                                            <td><input type="text" class="form-control" value="{{personas.Nombre}}"
+                                                    name="name" style="width: 125px;" disabled></td>
+                                            <td><input type="text" class="form-control" value="{{personas.Apellido}}"
+                                                    name="lastname" disabled style="width: 125px;"></td>
+                                            <td><input type="text" class="form-control" value="{{personas.Correo}}"
+                                                    name="mail" disabled></td>
+                                            <td>
+
+                                            <td>
+                                                <!--<a href="{{ url_for('registerdocentes') }}" type="button"
+                                                    class="form-control">Ver</a>-->
+                                            </td>
+                                        </tr>
+                                    </form>
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="../static/javascript/scriptsadmin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>PRINCIPAL MAIN</title>
+    <!--Incluimos los iconos y la topología de la letra de nuestra página-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!--Estilos de las animaciones-->
+    <link href="../static/css/styles_animations.css" rel="stylesheet" />
+    <!--Estilos de la página-->
+    <link href="../static/css/styles_contentpage.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Proyect Unit 3</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="{{ url_for('interfaceadminrd') }}">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 80px;">ID</th>
+                <th scope="col" style="width: 120px;">Cedula</th>
+                <th scope="col" style="width: 100px;">Nombre</th>
+                <th scope="col" style="width: 125px;">Apellido</th>
+                <th scope="col" style="width: 110px;">Rol</th>
+                <th scope="col" style="width: 90px;">AñoLectivo</th>
+                <th scope="col" style="width: 60px;">Paralelo</th>
+                <th scope="col" style="width: 85px;">Estado</th>
+                <th scope="col" style="width: 180px;">Correo</th>
+                <th scope="col">Contraseña</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for personas in personas %}
+            <form action="/editrd/{{personas.Nombre}}" method="POST">
+                <tr>
+                    <td><input type="text" class="form-control" value="{{personas._id}}" name="iddocente"
+                            style="width: 80px;"></td>
+                    <td><input type="text" class="form-control" value="{{personas.Cedula}}" name="cedula"
+                            style="width: 120px;" min="1000000000"
+                            max="9999999999"></td>
+                    <td><input type="text" class="form-control" value="{{personas.Nombre}}" name="name"
+                            style="width: 100px;"></td>
+                    <td><input type="text" class="form-control" value="{{personas.Apellido}}" name="lastname"
+                            style="width: 125px;"></td>
+                    <td><input type="text" class="form-control" value="{{personas.Rol}}" name="rol"
+                            style="width: 110px;"></td>
+                    <td><input type="text" class="form-control" value="{{personas.AñoLectivo}}" name="alectivo"
+                            style="width: 90px;"></td>
+                    <td><input type="text" class="form-control" value="{{personas.Paralelo}}" name="paralelo"
+                            style="width: 60px;"></td>
+                    <td>
+                        <select type="text" class="form-control mb-3" name="estado" style="width: 90px;">
+                            <option disabled selected>{{personas.Estado}}</option>
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="email" class="form-control" value="{{personas.Correo}}" name="mail"
+                            style="width: 180px;">
+                    </td>
+                    <td>
+                        <input type="password" class="form-control" value="{{personas.Contraseña}}" name="pwd"
+                            style="width: 95px;">
+                    </td>
+                    <td>
+                        <a href="{{url_for('deleterd', erd=personas.Nombre)}}"
+                            class="btn btn-danger btn-sm mt-3">Eliminar</a>
+                        <button class="btn btn-success btn-sm mt-3" type="submit">Modificar</button>
+                    </td>
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <!--Fin del Header-->
+    <!-- Copyright Section-->
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright &copy; Sitio Web de Steveen Sinchiguano 2022</small></div>
+    </div>
+</body>
+
+</html>

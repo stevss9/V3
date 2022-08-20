@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>PRINCIPAL MAIN</title>
+    <!--Incluimos los iconos y la topología de la letra de nuestra página-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!--Estilos de las animaciones-->
+    <link href="../static/css/styles_animations.css" rel="stylesheet" />
+    <!--Estilos de la página-->
+    <link href="../static/css/styles_contentpage.css" rel="stylesheet" />
+    <link href="../static/css/styles_main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Proyect Unit 3</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">RETURN</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section1">
+            <h1>
+                EVALUACIÓN
+            </h1>
+            <table>
+                <tr>
+                    <td><button id="0" onclick="destapar(0)"></button></td>
+                    <td><button id="1" onclick="destapar(1)"></button></td>
+                    <td><button id="2" onclick="destapar(2)"></button></td>
+                    <td><button id="3" onclick="destapar(3)"></button></td>
+                </tr>
+                <tr>
+                    <td><button id="4" onclick="destapar(4)"></button></td>
+                    <td><button id="5" onclick="destapar(5)"></button></td>
+                    <td><button id="6" onclick="destapar(6)"></button></td>
+                    <td><button id="7" onclick="destapar(7)"></button></td>
+                </tr>
+                <tr>
+                    <td><button id="8" onclick="destapar(8)"></button></td>
+                    <td><button id="9" onclick="destapar(9)"></button></td>
+                    <td><button id="10" onclick="destapar(10)"></button></td>
+                    <td><button id="11" onclick="destapar(11)"></button></td>
+                </tr>
+                <tr>
+                    <td><button id="12" onclick="destapar(12)"></button></td>
+                    <td><button id="13" onclick="destapar(13)"></button></td>
+                    <td><button id="14" onclick="destapar(14)"></button></td>
+                    <td><button id="15" onclick="destapar(15)"></button></td>
+                </tr>
+            </table>
+        </section>
+        <form action="evaluacion" method="post">
+            <section class="section3">
+                <h2 id="aciertos" class="estadisticas" for="aciertos">Aciertos: 0</h2>
+                <h2 id="t-restante" class="estadisticas" for="t-restante">Tiempo: 60 Segundos</h2>
+                <h2 id="movimientos" class="estadisticas" for="movimientos">Movimientos: 0</h2>
+                <button type="submit" class="btn btn-primary btn-block mb-2">Registrar</button>
+            </section>
+        </form>
+
+    </main>
+    <!--Inicio del Header-->
+    
+    <!--Fin del Header-->
+
+    <!-- Copyright Section-->
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright &copy; Sitio Web de Steveen Sinchiguano 2022</small></div>
+    </div>
+</body>
+
+</html>
+
+<script src="../static/javascript/script_evaluacion.js"></script>
