@@ -22,5 +22,6 @@ class Estudiante:
             'Paralelo': self.paralelo,
             'Estado': self.estado,
             'Edad': self.edad,
-            'Nota': "0"
+            'Nota': "0",
+            'Entrenamiento': "0"
         }

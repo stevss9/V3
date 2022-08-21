@@ -22,7 +22,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#">Proyect Unit 3</a>
+            <a class="navbar-brand" href="{{ url_for('principal') }}">Proyect Unit 3</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">RETURN</a>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{{ url_for('menugame') }}">RETURN</a>
                     </li>
                 </ul>
             </div>
@@ -74,7 +74,6 @@
                 <h2 id="aciertos" class="estadisticas" for="aciertos">Aciertos: 0</h2>
                 <h2 id="t-restante" class="estadisticas" for="t-restante">Tiempo: 60 Segundos</h2>
                 <h2 id="movimientos" class="estadisticas" for="movimientos">Movimientos: 0</h2>
-                <button type="submit" class="btn btn-primary btn-block mb-2">Registrar</button>
             </section>
         </form>
 

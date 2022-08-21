@@ -6,6 +6,7 @@ import database as dbase
 from dbestudiante import Estudiante
 from dbdocente import Docente 
 from dbparalelo import Paralelo
+from dbadministrador import Administrador
 
 
 
@@ -23,13 +24,32 @@ def principal():
 def login():
     return render_template('login.html')
 
+@app.route('/loginn')
+def loginn():
+    return render_template('loginn.html')
+
 @app.route('/traingame')
 def traingame():
     return render_template('traingame.html')
 
+@app.route('/menugame')
+def menugame():
+    return render_template('menugame.html')
+
 @app.route('/evaluationgame')
 def evaluationgame():
     return render_template('evaluationgame.html')
+
+@app.route('/interfacedocente')
+def interfacedocente():
+    return render_template('interfacedocente.html')
+
+@app.route('/editestudiantes')
+def editestudiantes():
+    estudiantes = db['estudiantes']
+    estudiantesReceived = estudiantes.find()
+
+    return render_template('editestudiantes.html', estudiantes = estudiantesReceived)
 
 @app.route('/ensatis')
 def ensatis():
@@ -48,7 +68,7 @@ def interfaceadmin():
 def interfaceadminre():
     estudiantes = db['estudiantes']
     estudiantesReceived = estudiantes.find()
-    
+
     return render_template('interfaceadminre.html', estudiantes = estudiantesReceived)
 
 
@@ -87,41 +107,44 @@ def interfaceadminra():
     return render_template('interfaceadminra.html', administrador = administradorReceived)
 
 #--------------------------------------------------------------------------------------
-#Method Administraddor-----------------------------------------------------------------
-@app.route('/administrador', methods=['POST'])
-def addAdministrador():
-    administrador = db['administrador']
-    idadministrador = request.form['idadministrador']
+#Method editar modo docnete-----------------------------------------------------------------
+#Method Put
+@app.route('/editree/<string:eree>', methods=['POST'])
+def editree(eree):
+    estudiantes = db['estudiantes']
+    idestudiante = request.form['idestudiante']
     cedula = request.form['cedula']
-    name1 = request.form['name1']
-    name2 = request.form['name2']
-    lastname1 = request.form['lastname1']
-    lastname2 = request.form['lastname2']
-    mail = request.form['mail']
-    pwd = request.form['pwd']
-    cell = request.form['cell']
+    name = request.form['name']
+    lastname = request.form['lastname']
+    rol = request.form['rol']
+    alectivo = request.form['alectivo']
+    paralelo = request.form['paralelo']
+    estado = request.form['estado']
+    edad = request.form['edad']
+    nota = request.form['nota']
+    entrena = request.form['entrena']
 
-    if name1 and mail and name2 and lastname2 and pwd and idadministrador and cedula and lastname1:
-        dbadmin = Docente(idadministrador, cedula, name1, name2, lastname1, lastname2, mail, pwd, cell)
-        administrador.insert_one(dbadmin.toDBCollection())
-        response = jsonify({
-            '_id': idadministrador,
+    if name and rol and edad and nota and idestudiante and cedula and lastname and alectivo and paralelo and estado:
+        estudiantes.update_one({'Nombre' : eree}, 
+            {'$set' : {
+            '_id': idestudiante,
             'Cedula': cedula,
-            'Nombre1' : name1,
-            'Nombre2' : name2,
-            'Apellido1' : lastname1,
-            'Apellido2' : lastname2,
-            'CorreoElectronico' : mail,
-            'Contraseña' : pwd,
-            'Telefono' : cell
-        })
-        return redirect(url_for('interfaceadminra'))
+            'Nombre' : name,
+            'Apellido' : lastname,
+            'Rol' : rol,
+            'Añolectivo' : alectivo,
+            'Paralelo': paralelo,
+            'Estado': estado,
+            'Edad' : edad,
+            'Nota' : nota,
+            'Entrenamiento' : entrena
+                }})
+        response = jsonify({'message' : 'Estudiante ' + eree + ' actualizado correctamente'})
+        return redirect(url_for('editestudiantes'))
     else:
         return notFound()
-
-
 #--------------------------------------------------------------------------------------
-#Method Docentes-----------------------------------------------------------------------
+#Method admin Docentes-----------------------------------------------------------------------
 @app.route('/docente', methods=['POST'])
 def addDocente():
     personas = db['personas']
@@ -226,7 +249,8 @@ def addEstudiante():
             'Año lectivo' : alectivo,
             'Paralelo': paralelo,
             'Estado': estado,
-            'Nota': "0"
+            'Nota': "0",
+            'Entrenamiento': "0"
 
         })
         return redirect(url_for('interfaceadminre'))
@@ -254,6 +278,7 @@ def editre(ere):
     estado = request.form['estado']
     edad = request.form['edad']
     nota = request.form['nota']
+    entrena = request.form['entrena']
 
     if name and rol and edad and nota and idestudiante and cedula and lastname and alectivo and paralelo and estado:
         estudiantes.update_one({'Nombre' : ere}, 
@@ -267,7 +292,8 @@ def editre(ere):
             'Paralelo': paralelo,
             'Estado': estado,
             'Edad' : edad,
-            'Nota' : nota
+            'Nota' : nota,
+            'Entrenamiento' : entrena
                 }})
         response = jsonify({'message' : 'Estudiante ' + ere + ' actualizado correctamente'})
         return redirect(url_for('registerestudiantes'))

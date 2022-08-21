@@ -43,11 +43,11 @@
             <!--Subsección izquierda donde estara el texto y el boton ingresar-->
             <secrion class="banner_title">
                 <h2>JUEGO DE ADIVINA LAS CARTAS <br></h2>
-                <a href="#" class="llamanos">INGRESAR A JUGAR</a>
+                <a href="{{ url_for('loginn') }}" class="llamanos">INGRESAR A JUGAR</a>
             </secrion>
             <!--Subsección derecha donde estara la imagen para ingresar-->
             <div class="banner_img">
-                <a href="#">
+                <a href="{{ url_for('loginn') }}">
                     <img src="../static/assets/images/complements/bg.png" height="600">
                 </a>
             </div>

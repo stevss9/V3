@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="{{ url_for('interfaceadminre') }}">Regresar</a>
+                            href="{{ url_for('interfacedocente') }}">Regresar</a>
                     </li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
 
         <tbody>
             {% for estudiantes in estudiantes %}
-            <form action="/editre/{{estudiantes.Nombre}}" method="POST">
+            <form action="/editree/{{estudiantes.Nombre}}" method="POST">
                 <tr>
                     <td><input type="text" class="form-control" value="{{estudiantes._id}}" name="idestudiante"
                             style="width: 80px;"></td>
@@ -93,8 +93,8 @@
                             style="width: 70px;">
                     </td>
                     <td>
-                        <a href="{{url_for('deletere', ere=estudiantes.Nombre)}}"
-                            class="btn btn-danger btn-sm mt-3">Eliminar</a>
+                        <!--<a href="{{url_for('deletere', ere=estudiantes.Nombre)}}"
+                            class="btn btn-danger btn-sm mt-3">Eliminar</a>-->
                         <button class="btn btn-success btn-sm mt-3" type="submit">Modificar</button>
                     </td>
                 </tr>
