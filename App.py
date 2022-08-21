@@ -107,7 +107,7 @@ def interfaceadminra():
     return render_template('interfaceadminra.html', administrador = administradorReceived)
 
 #--------------------------------------------------------------------------------------
-#Method editar modo docnete-----------------------------------------------------------------
+#DOCENTE MODIFICA LOS DATOS DEL USUARIO PERO NO ELIMINA--------------------------------
 #Method Put
 @app.route('/editree/<string:eree>', methods=['POST'])
 def editree(eree):
@@ -144,7 +144,7 @@ def editree(eree):
     else:
         return notFound()
 #--------------------------------------------------------------------------------------
-#Method admin Docentes-----------------------------------------------------------------------
+#ADMIN REGISTRA UN DOCENTE-------------------------------------------------------------
 @app.route('/docente', methods=['POST'])
 def addDocente():
     personas = db['personas']
@@ -178,14 +178,14 @@ def addDocente():
     else:
         return notFound()
 
-#Method delete
+#ADMIN ELIMINA UN DOCNETE
 @app.route('/deleterd/<string:erd>')
 def deleterd(erd):
     personas = db['personas']
     personas.delete_one({'Nombre' : erd})
     return redirect(url_for('registerdocentes'))
 
-#Method Put
+#ADMIN EDITA LOS DATOS DE UN DOCENTE
 @app.route('/editrd/<string:erd>', methods=['POST'])
 def editrd(erd):
     personas = db['personas']
@@ -219,9 +219,8 @@ def editrd(erd):
     else:
         return notFound()
 #--------------------------------------------------------------------------------------
-
 #--------------------------------------------------------------------------------------
-#Method Post
+#ADMIN AGREGA UN ESTUDIANTE
 @app.route('/estudiantes', methods=['POST'])
 def addEstudiante():
     estudiantes = db['estudiantes']
@@ -257,14 +256,14 @@ def addEstudiante():
     else:
         return notFound1()
 
-#Method delete
+#ADMIN ELIMINA ESTUDIANTE
 @app.route('/deletere/<string:ere>')
 def deletere(ere):
     estudiantes = db['estudiantes']
     estudiantes.delete_one({'Nombre' : ere})
     return redirect(url_for('registerestudiantes'))
 
-#Method Put
+#ADMIN MODIFICA LOS DAOTS DE UN ESTUDIANTE
 @app.route('/editre/<string:ere>', methods=['POST'])
 def editre(ere):
     estudiantes = db['estudiantes']
@@ -301,7 +300,7 @@ def editre(ere):
         return notFound()
 #--------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------
-#Method Add Cursos---------------------------------------------------------------------
+#MADMIN AGREGA UN NUEVO CURSO----------------------------------------------------------
 @app.route('/paralelo', methods=['POST'])
 def addParalelo():
     paralelo = db['paralelo']
@@ -321,7 +320,7 @@ def addParalelo():
     else:
         return notFound()
 
-#Method Put
+#ADMIN EDITA UN CURSO
 @app.route('/editrp/<string:erp>', methods=['POST'])
 def editrp(erp):
     paralelo = db['paralelo']
@@ -341,7 +340,7 @@ def editrp(erp):
     else:
         return notFound()
 
-#Method delete
+#ADMIN ELIMINA UN CURSO
 @app.route('/deleterp/<string:erp>')
 def deleterp(erp):
     paralelo = db['paralelo']
@@ -362,6 +361,7 @@ def notFound(error=None):
     response.status_code = 404
     return response
 
+#ERROR DE ID DUPLICADO 
 @app.errorhandler(pymongo.errors.DuplicateKeyError)
 def notFound1(error=None):
     message = {
