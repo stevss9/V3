@@ -24,9 +24,28 @@ def principal():
 def login():
     return render_template('login.html')
 
+#login admin
+#Controlador de la ruta para borrar los datos de la tabla
+@app.route('/login', methods=['POST'])
+#Crea la funcion para el ingreso del login de administrador
+def login1():
+    usuarios = db['personas']
+    user = usuarios.distinct("Correo")
+    if user is None:
+        return render_template('login.html')
+    else:
+        password = user["Contraseña"]
+        passw = request.form["password"]
+        if user:
+            if password == passw:
+                return redirect(url_for('interfacedocente'))
+        return render_template('login.html')
+
 @app.route('/loginn')
 def loginn():
-    return render_template('loginn.html')
+    estudiantes = db['estudiantes']
+    estudiantesReceived = estudiantes.find()
+    return render_template('loginn.html', estudiantes = estudiantesReceived)
 
 @app.route('/traingame')
 def traingame():
@@ -142,7 +161,7 @@ def editree(eree):
         response = jsonify({'message' : 'Estudiante ' + eree + ' actualizado correctamente'})
         return redirect(url_for('editestudiantes'))
     else:
-        return notFound()
+        return notFound1()
 #--------------------------------------------------------------------------------------
 #ADMIN REGISTRA UN DOCENTE-------------------------------------------------------------
 @app.route('/docente', methods=['POST'])
