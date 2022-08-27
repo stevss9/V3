@@ -49,12 +49,15 @@
             <div class="resume-section-content">
 
                 <h1 class="mb-0">
-                    DOCENTE
-                    <span class="text-primary">JULISSA</span>
+                    {% for personas in personas %}
+                    {{personas.Rol}}
+                    <span class="text-primary">{{personas.Nombre}} {{personas.Apellido}}</span>
+                    
                 </h1>
                 <div class="subheading mb-5">
                     Santo Domingo de los Tsachilas · 593 123 456 789 ·
-                    <a href="mailto:name@email.com">jjrenteria1@espe.edu.ec</a>
+                    <a href="mailto:name@email.com">{{personas.Correo  }}</a>
+                    {% endfor %}
                 </div>
             
                 <div class="social-icons">

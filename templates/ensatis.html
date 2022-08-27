@@ -22,7 +22,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('principal') }}">Proyecto Unidad 3</a>
+            <a class="navbar-brand" href="{{ url_for('interfaceadmin') }}">Proyecto Unidad 3</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -39,29 +39,38 @@
 
     <!--header-->
     <header class="masthead bg-primary text-white text-center">
+               
+        <table class="table table-dark">
+            <thead>
+            
+              <tr>
+                <th scope="col">iD</th>
+                <th scope="col">Nombre y Apellido</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Rol</th>
+                <th scope="col">Paralelo</th>
+              </tr>
+            
+            </thead>
+            <tbody>
+                <h3>
+                    {% for personas in personas %}
+                    {{personas.Nombre}} {{personas.Apellido}} <br>
+                    PARALELO {{personas.Paralelo}}
+                    {% endfor %}
+                </h3>
+                {% for estudiantes in estudiantes %}
+              <tr>
+                <th scope="row">{{estudiantes._id}}</th>
+                <td>{{estudiantes.Nombre}} {{estudiantes.Apellido}}</td>
+                <td>{{estudiantes.Edad}}</td>
+                <td>{{estudiantes.Rol}}</td>
+                <td>{{estudiantes.Paralelo}}</td>
+              </tr>
+            </tbody>
+            {% endfor %}
 
-        <section class="banner contenedor">
-            <h1>ENCUESTA DE SATISFACCIÓN</h1>
-            <section class="banner_title">
-                <a name="Calificacion" Value="1">
-                    <img src="../static/assets/images/complements/angry.png" height="150">
-                </a>
-            </section>
-            <section class="banner_title">
-                <a name="Calificacion" Value="3">
-                    <img src="../static/assets/images/complements/thinking.png" height="150">
-                </a>
-            </section>
-            <section class="banner_title">
-                <a name="Calificacion" Value="2">
-                    <img src="../static/assets/images/complements/sad.png" height="150">
-                </a>
-            </section>
-            <section class="banner_title">
-                <a name="Calificacion" Value="4">
-                    <img src="../static/assets/images/complements/smile.png" height="150">
-                </a>
-            </section>
+          </table>
             
 
             <div class="burbujas">

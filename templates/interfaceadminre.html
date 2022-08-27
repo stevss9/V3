@@ -78,11 +78,17 @@
                                 <input type="text" class="form-control mb-3" name="rol" value="Estudiante">
 
                                 <label>Año Lectivo</label>
-                                <input type="text" class="form-control mb-3" name="alectivo">
+                                <input type="text" class="form-control mb-3" name="alectivo" value="2022">
 
                                 <label>Paralelo</label>
-                                <input type="text" class="form-control mb-3" name="paralelo">
-
+                                <!--<input type="text" class="form-control mb-3" name="paralelo">-->
+                               
+                                <select type="text" class="form-control mb-3" name="paralelo" style="width: 90px;">
+                                    {% for paralelo in paralelo %}
+                                    <option>{{paralelo.Descripcion}}</option>
+                                    {% endfor %}
+                                </select>
+                                
                                 <label>Estado</label>
                                 <select type="text" class="form-control mb-3" name="estado">
                                     <option value="Activo">Activo</option>

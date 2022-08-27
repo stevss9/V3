@@ -12,6 +12,15 @@ from dbadministrador import Administrador
 
 db = dbase.dbConnection()
 
+usuarios = db['personas']
+estudiantes = db['personas']
+administador = db['administador']
+personas = db['personas']
+paralelo = db['paralelo']
+administrador = db['administrador']
+aniolectivo = db['aniolectivo']
+rol = db['rol']
+
 app = Flask(__name__) 
 app._static_folder = os.path.abspath("static/")
 
@@ -29,7 +38,7 @@ def login():
 @app.route('/login', methods=['POST'])
 #Crea la funcion para el ingreso del login de administrador
 def login1():
-    usuarios = db['personas']
+    #usuarios = db['personas']
     user = usuarios.distinct("Correo")
     if user is None:
         return render_template('login.html')
@@ -43,9 +52,10 @@ def login1():
 
 @app.route('/loginn')
 def loginn():
-    estudiantes = db['estudiantes']
+    #estudiantes = db['estudiantes']
     estudiantesReceived = estudiantes.find()
-    return render_template('loginn.html', estudiantes = estudiantesReceived)
+    personasReceived = personas.find({"Rol":"Estudiante"})
+    return render_template('loginn.html', estudiantes = estudiantesReceived, personas = personasReceived)
 
 @app.route('/traingame')
 def traingame():
@@ -61,59 +71,65 @@ def evaluationgame():
 
 @app.route('/interfacedocente')
 def interfacedocente():
-    return render_template('interfacedocente.html')
+    personasReceived = personas.find({"Rol": "Docente", "Paralelo": "Z"})
+    return render_template('interfacedocente.html', personas = personasReceived)
 
 @app.route('/editestudiantes')
 def editestudiantes():
-    estudiantes = db['estudiantes']
-    estudiantesReceived = estudiantes.find()
+    estudiantesReceived = estudiantes.find({"Rol": "Estudiante", "Paralelo": "Z"})
 
     return render_template('editestudiantes.html', estudiantes = estudiantesReceived)
 
 @app.route('/ensatis')
 def ensatis():
-    return render_template('ensatis.html')
+    personasReceived = personas.find({"Rol": "Docente", "Paralelo": "A"})
+    estudiantesReceived = personas.find({"Rol": "Estudiante", "Paralelo": "A"})
+    paraleloReceived =personas.find({"Paralelo": "A"})
+    return render_template('ensatis.html',  paralelo = paraleloReceived, estudiantes =estudiantesReceived, personas = personasReceived) 
 
 
 #Controlador de la interfaz principal del administrador
 @app.route('/interfaceadmin')
 def interfaceadmin():
-    administador = db['administador']
+    #administador = db['administador']
     administadorReceived = administador.find()
     return render_template('interfaceadmin.html', administador = administadorReceived)
 
 #Controlador de la interfaz principal del administrador registrando estudiantes
 @app.route('/interfaceadminre')
 def interfaceadminre():
-    estudiantes = db['estudiantes']
-    estudiantesReceived = estudiantes.find()
-
-    return render_template('interfaceadminre.html', estudiantes = estudiantesReceived)
+    #estudiantes = db['personas']
+    estudiantesReceived = personas.find({"Rol":"Estudiante", "Estado":"Activo"})
+    paraleloReceived = paralelo.find({"Estado":"Activo"})
+    return render_template('interfaceadminre.html', estudiantes = estudiantesReceived, paralelo = paraleloReceived)
 
 
 #Controlador de la interfaz principal del administrador registrando docentes
 @app.route('/interfaceadminrd')
 def interfaceadminrd():
-    personas = db['personas']
-    personasReceived = personas.find()
-    return render_template('interfaceadminrd.html', personas = personasReceived)
+    #personas = db['personas'] 
+    personasReceived = personas.find({"Rol":"Docente","Estado":"Activo"})
+    paraleloReceived = paralelo.find({"Estado":"Activo"})
+    return render_template('interfaceadminrd.html', personas = personasReceived, paralelo = paraleloReceived)
 
 @app.route('/registerdocentes')
 def registerdocentes():
-    personas = db['personas']
-    personasReceived = personas.find()
-    return render_template('registerdocentes.html', personas = personasReceived)
+    #personas = db['personas']
+    personasReceived = personas.find({"Rol":"Docente"})
+    aniolectivoReceived = aniolectivo.find()
+    return render_template('registerdocentes.html', personas = personasReceived, aniolectivo = aniolectivoReceived)
 
 @app.route('/registerestudiantes')
 def registerestudiantes():
-    estudiantes = db['estudiantes']
-    estudiantesReceived = estudiantes.find()
-    return render_template('registerestudiantes.html', estudiantes = estudiantesReceived)
+    #estudiantes = db['personas']
+    estudiantesReceived = personas.find({"Rol":"Estudiante"})
+    paraleloReceived = personas.distinct("Paralelo")
+    return render_template('registerestudiantes.html', estudiantes = estudiantesReceived, paralelo = paraleloReceived)
 
 #Controlador de la interfaz principal del administrador registrando paralelos
 @app.route('/interfaceadminrp')
 def interfaceadminrp():
-    paralelo = db['paralelo']
+    #paralelo = db['paralelo']
     paraleloReceived = paralelo.find()
     return render_template('interfaceadminrp.html', paralelo = paraleloReceived)
 
@@ -121,7 +137,7 @@ def interfaceadminrp():
 #Controlador de la interfaz principal del administrador registrando año lectivo
 @app.route('/interfaceadminra')
 def interfaceadminra():
-    administrador = db['administrador']
+    #administrador = db['administrador']
     administradorReceived = administrador.find()
     return render_template('interfaceadminra.html', administrador = administradorReceived)
 
@@ -130,7 +146,7 @@ def interfaceadminra():
 #Method Put
 @app.route('/editree/<string:eree>', methods=['POST'])
 def editree(eree):
-    estudiantes = db['estudiantes']
+    #estudiantes = db['estudiantes']
     idestudiante = request.form['idestudiante']
     cedula = request.form['cedula']
     name = request.form['name']
@@ -166,7 +182,7 @@ def editree(eree):
 #ADMIN REGISTRA UN DOCENTE-------------------------------------------------------------
 @app.route('/docente', methods=['POST'])
 def addDocente():
-    personas = db['personas']
+    #personas = db['personas']
     iddocente = request.form['iddocente']
     cedula = request.form['cedula']
     name = request.form['name']
@@ -200,14 +216,14 @@ def addDocente():
 #ADMIN ELIMINA UN DOCNETE
 @app.route('/deleterd/<string:erd>')
 def deleterd(erd):
-    personas = db['personas']
+    #personas = db['personas']
     personas.delete_one({'Nombre' : erd})
     return redirect(url_for('registerdocentes'))
 
 #ADMIN EDITA LOS DATOS DE UN DOCENTE
 @app.route('/editrd/<string:erd>', methods=['POST'])
 def editrd(erd):
-    personas = db['personas']
+    #personas = db['personas']
     iddocente = request.form['iddocente']
     cedula = request.form['cedula']
     name = request.form['name']
@@ -242,7 +258,7 @@ def editrd(erd):
 #ADMIN AGREGA UN ESTUDIANTE
 @app.route('/estudiantes', methods=['POST'])
 def addEstudiante():
-    estudiantes = db['estudiantes']
+    #estudiantes = db['personas']
     idestudiante = request.form['idestudiante']
     cedula = request.form['cedula']
     name = request.form['name']
@@ -278,14 +294,14 @@ def addEstudiante():
 #ADMIN ELIMINA ESTUDIANTE
 @app.route('/deletere/<string:ere>')
 def deletere(ere):
-    estudiantes = db['estudiantes']
+    #estudiantes = db['personas']
     estudiantes.delete_one({'Nombre' : ere})
     return redirect(url_for('registerestudiantes'))
 
 #ADMIN MODIFICA LOS DAOTS DE UN ESTUDIANTE
 @app.route('/editre/<string:ere>', methods=['POST'])
 def editre(ere):
-    estudiantes = db['estudiantes']
+    #estudiantes = db['personas']
     idestudiante = request.form['idestudiante']
     cedula = request.form['cedula']
     name = request.form['name']
@@ -322,7 +338,7 @@ def editre(ere):
 #MADMIN AGREGA UN NUEVO CURSO----------------------------------------------------------
 @app.route('/paralelo', methods=['POST'])
 def addParalelo():
-    paralelo = db['paralelo']
+    #paralelo = db['paralelo']
     idparalelo = request.form['idparalelo']
     descripcion = request.form['descripcion']
     estado = request.form['estado']
@@ -342,7 +358,7 @@ def addParalelo():
 #ADMIN EDITA UN CURSO
 @app.route('/editrp/<string:erp>', methods=['POST'])
 def editrp(erp):
-    paralelo = db['paralelo']
+    #paralelo = db['paralelo']
     idparalelo = request.form['idparalelo']
     descripcion = request.form['descripcion']
     estado = request.form['estado']
@@ -362,7 +378,7 @@ def editrp(erp):
 #ADMIN ELIMINA UN CURSO
 @app.route('/deleterp/<string:erp>')
 def deleterp(erp):
-    paralelo = db['paralelo']
+    #paralelo = db['paralelo']
     paralelo.delete_one({'Descripcion' : erp})
     return redirect(url_for('interfaceadminrp'))
 

@@ -37,7 +37,7 @@
         </div>
     </nav>
     <br><br><br><br>
-<!--TABLA DEL ESTUDIANTE-->
+    <!--TABLA DEL ESTUDIANTE-->
     <table class="table table-striped">
         <thead>
             <tr>
@@ -71,11 +71,13 @@
                             style="width: 110px;"></td>
                     <td><input type="text" class="form-control" value="{{estudiantes.AñoLectivo}}" name="alectivo"
                             style="width: 90px;"></td>
-                    <td><input type="text" class="form-control" value="{{estudiantes.Paralelo}}" name="paralelo"
+                    <td>
+                        <input type="text" class="form-control" value="{{estudiantes.Paralelo}}" name="paralelo"
                             style="width: 60px;"></td>
+
                     <td>
                         <select type="text" class="form-control mb-3" name="estado" style="width: 90px;">
-                            <option  selected>{{estudiantes.Estado}}</option>
+                            <option selected>{{estudiantes.Estado}}</option>
                             <option value="Activo">Activo</option>
                             <option value="Inactivo">Inactivo</option>
                         </select>
