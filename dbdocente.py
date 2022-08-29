@@ -1,5 +1,16 @@
 class Docente:
     def __init__(self, iddocente,cedula, name,lastname, rol, alectivo, paralelo, estado, mail, pwd):
+        """
+     función  _init_
+    
+    Parameters
+    ------------
+    llamamos a nuestros name del formulario para el administrador
+
+     Return
+     -----------
+    
+    """
         self.iddocente = iddocente
         self.cedula = cedula
         self.name = name
@@ -12,6 +23,18 @@ class Docente:
         self.pwd = pwd
 
     def toDBCollection(self):
+        """
+     función  toDBCollection con parámetro self
+    
+    Parameters
+    ------------
+  
+     Return
+     -----------
+      devuelve la estructura de la coelccion personas y llamamos con el name a nuestros campos
+
+    
+    """
         return{
             '_id': self.iddocente,
             'Cedula': self.cedula,
