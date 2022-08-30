@@ -174,7 +174,7 @@ def interfacedocente():
      -----------
      devuelve la subpage interfaz docente que se encuetra en la carpeta template y la busqueda de sólo docentes de paralelo z
     """
-    personasReceived = personas.find({"Rol": "Docente", "Paralelo": "Z"})
+    personasReceived = personas.find({"Rol": "Docente", "Paralelo": "A"})
     return render_template('interfacedocente.html', personas = personasReceived)
 
 
@@ -221,7 +221,7 @@ def ensatis():
      estudiantes sólo paralelo a y paralelo a
     """
     personasReceived = personas.find({"Rol": "Docente", "Paralelo": "A"})
-    estudiantesReceived = personas.find({"Rol": "Estudiante", "Paralelo": "A"})
+    estudiantesReceived = personas.find({"Rol": "Estudiante"})
     paraleloReceived =personas.find({"Paralelo": "A"})
     return render_template('ensatis.html',  paralelo = paraleloReceived, estudiantes =estudiantesReceived, personas = personasReceived) 
 
