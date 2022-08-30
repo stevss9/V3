@@ -192,7 +192,7 @@ def editestudiantes():
      -----------
      devuelve la subpage interfaz docente que se encuetra en la carpeta template y la busqueda de sólo estudiantes de paralelo z
     """
-    estudiantesReceived = estudiantes.find({"Rol": "Estudiante", "Paralelo": "Z"})
+    estudiantesReceived = estudiantes.find({"Rol": "Estudiante", "Paralelo": "A"})
 
     return render_template('editestudiantes.html', estudiantes = estudiantesReceived)
 
